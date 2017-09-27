@@ -1,13 +1,13 @@
-# Project Name
+# CheapEats
 
-> Pithy project description
+> An application that allows users to find lower priced menu items & deals, based upon location.
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Alber Chung
+  - Roscoe Coney
+  - Tiffany Barth
+  - Christine Taylor
 
 ## Table of Contents
 
