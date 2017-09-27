@@ -1,6 +1,6 @@
 # CheapEats
 
-> An application that allows users to find lower priced menu items & deals, based upon location.
+> An application that allows users to find lower priced menu items & deals, based on location.
 
 ## Team
 
