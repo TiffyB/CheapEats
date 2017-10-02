@@ -1,25 +1,45 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "cheapeats",
+  "description": "> An application that allows users to find lower priced menu items & deals, based on location.",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.4.0"
   },
   "scripts": {
+    "react-dev": "./node_modules/.bin/webpack -d --watch",
+    "start": "nodemon ./server/index.js"
   },
   "dependencies": {
+    "express": "^4.16.1",
+    "pg": "^7.3.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.24.1",
     "babel-register": "^6.7.2",
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "webpack": "^3.6.0"
   },
   "babel": {
     "presets": [
-      "es2015"
+      "env"
     ]
-  }
+  },
+  "version": "0.0.1",
+  "main": "server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CheapEats/CheapEats.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CheapEats/CheapEats/issues"
+  },
+  "homepage": "https://github.com/CheapEats/CheapEats#readme"
 }
