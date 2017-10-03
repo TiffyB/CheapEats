@@ -8,7 +8,6 @@ const auth = require('./middleware/auth.js');
 const routes = require('./routes.js');
 
 const app = express();
-const bodyParser = require('body-parser');
 const yelp = require('../helpers/yelp.js');
 
 const PORT = process.env.PORT || 8080;
