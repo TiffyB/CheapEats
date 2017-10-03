@@ -1,11 +1,17 @@
 // server
-
-const express = require('express')
+const express = require('express');
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const yelp = require('../helpers/yelp.js');
 
 const PORT = process.env.PORT || 8080;
+app.use(express.static(path.join(__dirname, '../client/public')));
+
+
+app.listen(PORT, () => {
+  console.log(`server listening on PORT: ${PORT.toString()}`)
+});
 
 app.use(bodyParser.json())
 
@@ -75,5 +81,4 @@ app.post('/find/restaurants/:yelpId', (req, res) => {
   })
 })
 
-app.listen(PORT);
 
