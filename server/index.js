@@ -22,6 +22,7 @@ const sessionOpts = {
   },
 };
 
+
 auth(app, passport);
 
 app.use(express.static(path.join(__dirname, '../client/public')));
