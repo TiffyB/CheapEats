@@ -21,14 +21,6 @@ let getClosestMatches = (term, location) => {
   });
 }
 
-// Used below code to ensure search is working (should return an array of businesses within response body):
-// getClosestMatches('tai kee won ton', 'san jose ca')
-// .then((response) => {
-//   console.log('Businesses: ', response);
-// })
-// .catch((error) => {
-//   console.log('ERROR: ', error);
-// })
 
 let getRestaurantInfo = (yelpId) => {
 
