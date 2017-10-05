@@ -28,6 +28,13 @@ const Owner = sequelize.define('owner', {
 sequelize.sync();
 
 
+
+
+// const getOwnerById = (id) => {}
+// const getOwnerByLogin = (login) => {}
+// const saveOwner = (owner) => {}
+  // owner = {login: login, password: password}
+
 const LocalStrategy = require('passport-local').Strategy;
 const auth = (app,passport) => {
 

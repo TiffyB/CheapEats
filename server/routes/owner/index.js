@@ -54,6 +54,10 @@ const ownerRoutes = (app, passport) =>{
     console.log('owner post deals');
     res.send('ok');
   });
+  app.post('/owner/cheapItems', isLoggedIn, (req, res) => {
+    console.log('owner post deals');
+    res.send('ok');
+  });
 }
 
 module.exports = ownerRoutes;
