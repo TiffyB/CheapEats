@@ -1,4 +1,4 @@
-input {
+input, #submitButton {
 	margin-left: 15px
 }
 
@@ -11,13 +11,24 @@ input {
     margin-bottom: 15px;
 }
 
-h1,h2,h3,p {
+span {
+	color: red;
+	font-weight: bold;
+}
+
+img {
+	border-radius: 6px;
+}
+
+h1,h2,h3,h4,p {
 	text-align: center;
 }
 
 h2{
 	color: red;
 }
+
+h4 {color: gold;}
 
 .secondHeader {
 	color: #ce6e46;
