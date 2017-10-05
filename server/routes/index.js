@@ -1,71 +1,14 @@
+const ownerRoutes = require('./owner');
+const cheapitemsRoutes = require('./cheapitems');
+const dealsRoutes = require('./deals');
 
 const routes = (app, passport) => {
 
-  app.post('/login', 
-    passport.authenticate('local'),
-    (req, res) => {
-      res.redirect('/owner');
-    }
-  );
+  ownerRoutes(app, passport);
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
+  cheapitemsRoutes(app);
 
-
-
-  app.get('/cheapitems', (req, res) => {
-    console.log('list cheapitems');
-    res.send('ok');
-  });
-
-  app.get('/cheapitems/:zip', (req, res) => {
-    console.log(`get cheap items at ${req.params.zip}`);
-    res.send('ok');
-  });
-
-  app.get('/cheapitems/:zip/:cuisineType', (req, res) => {
-    console.log(`get cheap items at ${req.params.zip} and type ${req.params.cuisineType}`);
-    res.send('ok');
-  });
-
-  app.post('/cheapitems/:zip', (req, res) => {
-    console.log(`post cheapitems at ${req.params.zip}`);
-    res.send('ok');
-  });
-
-  app.post('/cheapitems', (req, res) => {
-    console.log('post cheapitems');
-    res.send('ok');
-  });
-
-  app.get('/deals', (req, res) => {
-    console.log('get deals');
-    res.send('ok');
-  })
-
-  app.get('/deals/:zip', (req, res) => {
-    console.log(`get deals at ${req.params.zip}`);
-    res.send('ok');
-  });
-
-  app.get('/deals/:zip/:cuisineType', (req, res) => {
-    console.log(`get deals at ${req.params.zip} and type ${req.params.cuisineType}`);
-    res.send('ok');
-  });
-
-  app.post('/deals/:zip', (req, res) => {
-    console.log(`post deals at ${req.params.zip}`);
-    res.send('ok');
-  });
-
-  app.post('/deals', (req, res) => {
-    console.log('post deals');
-    res.send('ok');
-  });
-
-
+  dealsRoutes(app);
 
   /*================================================================================
   This route will provide users with a list of the closest yelp restaurant 

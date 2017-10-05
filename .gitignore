@@ -28,3 +28,7 @@ dist/
 node_modules/
 bower_components/
 yelp_config.js
+dump.rdb
+
+
+
