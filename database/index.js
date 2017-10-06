@@ -3,10 +3,11 @@ Install postgreSQL using the following steps:
 	1.	Install Homebrew
 	2.	Run this command: brew install postgres
 	3.	Run this command: "initdb /usr/local/var/postgres"
-	4.	Then run this command: "/usr/local/Cellar/postgresql/<version>/bin/createuser -s postgres" (this creates the user 'postgres' on MAC)
+	4.	Then run this command (fill in version w/ your postgres version): "/usr/local/Cellar/postgresql/<version>/bin/createuser -s postgres" (this creates the user 'postgres' on MAC)
   5.  Start the server: brew services start postgresql
   6.  Create the 'cheapeats' database: createdb cheapeats
-  7.  Add database schema: psql -d cheapeats -f <insert path to schema.sql here>
+  7.  Add database schema to cheapeats database: psql -d cheapeats -f <insert path to schema.sql here>, 
+      i.e. "psql -d cheapeats -f schema.sql" if in root directory.
   8.  To view the tables (schema),
       - type: 'psql -U postgres'
       - followed by '\c cheapeats'
