@@ -9,20 +9,25 @@
 -- Table 'Deals'
 -- 
 -- ---
+DROP DATABASE IF EXISTS cheapeats;
 
-DROP TABLE IF EXISTS Deals;
+CREATE DATABASE cheapeats;
+
+DROP TABLE IF EXISTS Deals cascade;
 		
-CREATE SEQUENCE Deals_seq;
+CREATE SEQUENCE IF NOT EXISTS Deals_seq;
 
 CREATE TABLE Deals (
-  id INTEGER NULL DEFAULT NEXTVAL ('Deals_seq') DEFAULT NULL,
-  yelp_ID INTEGER NULL DEFAULT NULL,
-  price DECIMAL(3, 2) NOT NULL DEFAULT NULL,
-  dealName VARCHAR(50) NOT NULL DEFAULT 'NULL',
-  description MEDIUMTEXT(250) NULL DEFAULT 'NULL',
-  imageURL VARCHAR(100) NOT NULL DEFAULT 'NULL',
-  startTime DATETIME(100) NOT NULL DEFAULT 'NULL',
-  endTime DATETIME(100) NOT NULL DEFAULT 'NULL',
+  id INTEGER NOT NULL DEFAULT NEXTVAL ('Deals_seq'),
+  yelp_ID INTEGER,
+  price DECIMAL(3, 2),
+  dealName VARCHAR(50),
+  description TEXT,
+  imageURL VARCHAR(100),
+  startDate DATE,
+  startTime TIME,
+  endDate DATE,
+  endTime TIME,
   PRIMARY KEY (id)
 );
 
@@ -31,17 +36,17 @@ CREATE TABLE Deals (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS CheapItems;
+DROP TABLE IF EXISTS CheapItems cascade;
 		
-CREATE SEQUENCE CheapItems_seq;
+CREATE SEQUENCE IF NOT EXISTS CheapItems_seq;
 
 CREATE TABLE CheapItems (
-  id INTEGER NULL DEFAULT NEXTVAL ('CheapItems_seq') DEFAULT NULL,
-  yelp_ID INTEGER NULL DEFAULT NULL,
-  price DECIMAL(3, 2) NOT NULL DEFAULT NULL,
-  menuItem VARCHAR(100) NOT NULL DEFAULT 'NULL',
-  imageURL VARCHAR(100) NULL DEFAULT 'NULL',
-  description MEDIUMTEXT(250) NULL DEFAULT 'NULL',
+  id INTEGER NOT NULL DEFAULT NEXTVAL ('CheapItems_seq'),
+  yelp_ID INTEGER,
+  price DECIMAL(3, 2),
+  menuItem VARCHAR(100),
+  imageURL VARCHAR(100),
+  description TEXT,
   PRIMARY KEY (id)
 );
 
@@ -50,14 +55,14 @@ CREATE TABLE CheapItems (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS Owners;
+DROP TABLE IF EXISTS Owners cascade;
 		
-CREATE SEQUENCE Owners_seq;
+CREATE SEQUENCE IF NOT EXISTS Owners_seq;
 
 CREATE TABLE Owners (
-  id INTEGER NULL DEFAULT NEXTVAL ('Owners_seq') DEFAULT NULL,
-  login CHAR(30) NOT NULL DEFAULT 'NULL',
-  password CHAR(60) NOT NULL DEFAULT 'NULL',
+  id INTEGER NOT NULL DEFAULT NEXTVAL ('Owners_seq'),
+  login CHAR(30),
+  password CHAR(60),
   PRIMARY KEY (id)
 );
 
@@ -66,19 +71,20 @@ CREATE TABLE Owners (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS YelpData;
+DROP TABLE IF EXISTS YelpData cascade;
 		
-CREATE SEQUENCE YelpData_seq;
+CREATE SEQUENCE IF NOT EXISTS YelpData_seq;
 
 CREATE TABLE YelpData (
-  id INTEGER NULL DEFAULT NEXTVAL ('YelpData_seq') DEFAULT NULL,
-  yelp_api_ID VARCHAR(100) NOT NULL DEFAULT NULL,
-  address MEDIUMTEXT(50) NOT NULL DEFAULT 'NULL',
-  ZIP CAST(5 AS INT) NOT NULL DEFAULT NULL,
-  type VARCHAR(25) NOT NULL DEFAULT 'NULL',
-  imageURL VARCHAR(50) NULL DEFAULT 'NULL',
-  restaurantURL VARCHAR NULL DEFAULT 'NULL',
-  owner_ID INTEGER NULL DEFAULT NULL,
+  id INTEGER NOT NULL DEFAULT NEXTVAL ('YelpData_seq'),
+  yelp_api_ID VARCHAR(100),
+  address TEXT,
+  ZIP INTEGER,
+  type VARCHAR(100),
+  imageURL VARCHAR,
+  restaurantURL VARCHAR,
+  owner_ID INTEGER,
+  name VARCHAR(50),
   PRIMARY KEY (id)
 );
 
@@ -87,15 +93,15 @@ CREATE TABLE YelpData (
 -- 
 -- ---
 
-DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Users cascade;
 		
-CREATE SEQUENCE Users_seq;
+CREATE SEQUENCE IF NOT EXISTS Users_seq;
 
 CREATE TABLE Users (
-  id INTEGER NULL DEFAULT NEXTVAL ('Users_seq') DEFAULT NULL,
-  login VARCHAR(30) NOT NULL,
-  password VARCHAR(60) NOT NULL,
-  cheapitem_id INTEGER NULL DEFAULT NULL,
+  id INTEGER NOT NULL DEFAULT NEXTVAL ('Users_seq'),
+  login VARCHAR(30),
+  password VARCHAR(60),
+  cheapitem_id INTEGER,
   PRIMARY KEY (id)
 );
 
@@ -122,13 +128,19 @@ ALTER TABLE Users ADD FOREIGN KEY (cheapitem_id) REFERENCES CheapItems (id);
 -- Test Data
 -- ---
 
--- INSERT INTO `Deals` (`id`,`yelp_ID`,`price`,`dealName`,`description`,`imageURL`,`startTime`,`endTime`) VALUES
--- ('','','','','','','','');
--- INSERT INTO `CheapItems` (`id`,`yelp_ID`,`price`,`menuItem`,`imageURL`,`description`) VALUES
--- ('','','','','','');
--- INSERT INTO `Owners` (`id`,`login`,`password`) VALUES
--- ('','','');
--- INSERT INTO `YelpData` (`id`,`address`,`ZIP`,`type`,`imageURL`,`restaurantURL`,`owner_ID`) VALUES
--- ('','','','','','','');
--- INSERT INTO `Users` (`id`,`login`,`password`,`cheapitem_id`) VALUES
--- ('','','','');
+-- INSERT INTO `Deals` (yelp_ID, price, dealName, description, imageURL, startTime, startDate, endTime, endDate) VALUES
+-- (1, 5.00, 'Half-Priced Mixt Ceasar','romaine hearts, shaved parmesan, avocado, seasonal radish, garlic herb croutons, savory herbs, caesar dressing','https://s3-media3.fl.yelpcdn.com/bphoto/DOAvz0pcghE07_Kopl1icg/o.jpg','','','');
+
+INSERT INTO Owners (login, password) VALUES
+('restaurant1','salad');
+
+
+INSERT INTO YelpData (yelp_api_ID, address, ZIP, type, imageURL, restaurantURL, name, owner_ID) VALUES
+('mixt-san-francisco-9','51 Yerba Buena Ln\nSan Francisco, CA 94103', 94103,'Salad, American (New), Vegetarian','https://s3-media3.fl.yelpcdn.com/bphoto/DOAvz0pcghE07_Kopl1icg/o.jpg','https://www.yelp.com/biz/mixt-san-francisco-9?adjust_creative=EF98aLeuaj_agomwLZqxkA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=EF98aLeuaj_agomwLZqxkA','Mixt', 1);
+
+INSERT INTO CheapItems (yelp_ID, price, menuItem, imageURL, description) VALUES
+(1, 9.95,'Mixt Ceasar','https://s3-media3.fl.yelpcdn.com/bphoto/hLZDGlGqjPZRAKmgN87v0A/o.jpg','romaine hearts, shaved parmesan, avocado, seasonal radish, garlic herb croutons, savory herbs, caesar dressing');
+
+
+INSERT INTO Users (login, password, cheapitem_id) VALUES
+('someguy','password1234', 1);

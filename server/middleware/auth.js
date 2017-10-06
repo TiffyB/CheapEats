@@ -14,18 +14,18 @@ const genHash = password => {
 
 //  model for testing auth
 //  postgres -D /usr/local/var/postgres  <= for strating postgresql
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('cheapeats', '', '', {
-  host: 'localhost',
-  dialect: 'postgres',  
-});
-const Owner = sequelize.define('owner', {
-  login: {type: Sequelize.STRING(30), unique: true},
-  password: Sequelize.STRING(60)
-}, {
-  timestamps: false,
-});
-sequelize.sync();
+// const Sequelize = require('sequelize');
+// const sequelize = new Sequelize('cheapeats', '', '', {
+//   host: 'localhost',
+//   dialect: 'postgres',  
+// });
+// const Owner = sequelize.define('owner', {
+//   login: {type: Sequelize.STRING(30), unique: true},
+//   password: Sequelize.STRING(60)
+// }, {
+//   timestamps: false,
+// });
+// sequelize.sync();
 
 
 
