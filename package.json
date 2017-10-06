@@ -24,12 +24,11 @@
     "pg": "^7.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-<<<<<<< HEAD
     "react-modal": "^2.3.3",
-=======
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
->>>>>>> login page update
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "redis": "^2.8.0",
     "request": "^2.81.0",
     "sequelize": "^4.13.3",
