@@ -28,7 +28,9 @@ h2{
 	color: red;
 }
 
-h4 {color: gold;}
+h4 {
+  color: gold;
+}
 
 .secondHeader {
 	color: #ce6e46;
