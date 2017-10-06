@@ -31,4 +31,4 @@ yelp_config.js
 dump.rdb
 backup/
 
-
+*/.DS_Store
