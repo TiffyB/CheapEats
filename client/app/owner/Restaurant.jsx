@@ -7,7 +7,7 @@ class Restaurant extends React.Component {
   }
 
   selectRestaurant() {
-    this.props.select(this.props.restaurant.name)
+    this.props.select(this.props.restaurant)
   }
 
   render() {
@@ -17,11 +17,12 @@ class Restaurant extends React.Component {
       <div className={classname} 
         onClick={this.selectRestaurant.bind(this)}>
         <h3>{this.props.restaurant.name}</h3>
-        <p>Type</p>
-        <p>Address</p>
-        <p>ZIP</p>
-        <p>Image URL</p>
-        <p>Yelp ID</p>
+        <p>{this.props.restaurant.address}</p>
+        <p>{this.props.restaurant.type}</p>
+        <p>{this.props.restaurant.ZIP}</p>
+        <p>{this.props.restaurant.imageURL}</p>
+        <p>{this.props.restaurant.restaurantURL}</p>
+        <p>{this.props.restaurant.YelpID}</p>
       </div>
     );
   }

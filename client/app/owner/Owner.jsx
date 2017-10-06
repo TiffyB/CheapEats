@@ -15,6 +15,16 @@ class Owner extends React.Component {
     }
   }
 
+  // componentDidMount() {
+  //   axios.get('/owner/restaurants', {params: {owner: this.state.owner}})
+  //     .then(res => {
+  //       this.setState({
+  //         restaurants: res.data,
+  //       });
+  //     });
+  // }
+
+
   selectRestaurant(name) {
     this.setState({
       selected: name,
@@ -32,11 +42,18 @@ class Owner extends React.Component {
     });
   }
   
+  logout() {
+    axios.get('/owner/logout')
+      .then(res => {
+        window.location='/login';
+      });
+  }
 
   render() {
     return (
       <div>
         <h1>{this.state.owner}</h1>
+        <button type="button" onClick={this.logout.bind(this)}>Logout</button> <br/>
         <RestaurantList 
           restaurants={this.state.restaurants} 
           select={this.selectRestaurant.bind(this)}

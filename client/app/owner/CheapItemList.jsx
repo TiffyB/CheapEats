@@ -1,13 +1,17 @@
 import React from 'react';
 import CheapItem from './CheapItem.jsx';
 import Modal from 'react-modal';
+import axios from 'axios';
 
 class CheapItemList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modifyModal: false,
-      mItemName: '',
+      mName: '',
+      mPrice: 0,
+      mDescription: '',
+      mImageURL: '',
     }
   }
 
@@ -15,6 +19,10 @@ class CheapItemList extends React.Component {
     // add item to list and send save request to server
     this.setState({
       modifyModal: true,
+      mName: '',
+      mPrice: 0,
+      mDescription: '',
+      mImageURL: '',
     });
   }
 
@@ -24,10 +32,49 @@ class CheapItemList extends React.Component {
     });
   }
 
-  modifyItem (name) {
+  modifyItem (item) {
     this.setState({
-      mItemName: name,
+      mName: item.name,
+      mPrice: item.price,
+      mDescription: item.description,
+      mImageURL: item.imageURL,
       modifyModal: true,
+    });
+  }
+
+  updateName(event) {
+    this.setState({
+      mName: event.target.value,
+    });
+  }
+
+  updatePrice(event) {
+    this.setState({
+      mPrice: event.target.value,
+    });
+  }
+
+  updateDescription(event) {
+    this.setState({
+      mDescription: event.target.value,
+    });
+  }
+
+  updateImageURL(event) {
+    this.setState({
+      mImageURL: event.target.value,
+    });
+  }
+
+  updateItem() {
+    this.setState({
+      modifyModal:false,
+    })
+    axios.post('/owner/cheapItems', {
+      name:this.state.mName,
+      price:this.state.mPrice,
+      description:this.state.mDescription,
+      imageURL:this.state.mImageURL,
     })
   }
 
@@ -48,13 +95,12 @@ class CheapItemList extends React.Component {
           contentLabel="modifyItem"
           isOpen={this.state.modifyModal}>
 
-          <h1>Cheap Item [ {this.state.mItemName} ] Info.</h1>
-          Name: <input type="text" /> <br />
-          Price: <input type="text" /> <br />
-          Description: <input type="text" /> <br />
-          Image URL: <input type="text" />
-          <br />
-          <button onClick={this.closeModal.bind(this)}>Update</button>
+          <h1>Cheap Item Info.</h1>
+          Name: <input type="text" value={this.state.mName} onChange={this.updateName.bind(this)} /> <br />
+          Price: <input type="number" step="0.01" min="0" value={this.state.mPrice} onChange={this.updatePrice.bind(this)} /> <br />
+          Description: <input type="text" value={this.state.mDescription} onChange={this.updateDescription.bind(this)} /> <br />
+          Image URL: <input type="text" value={this.state.mImageURL} onChange={this.updateImageURL.bind(this)} /> <br />
+          <button onClick={this.updateItem.bind(this)}>Update</button>
           <button onClick={this.closeModal.bind(this)}>Cancel</button>
           <button onClick={this.closeModal.bind(this)}>Delete</button>
         </Modal>

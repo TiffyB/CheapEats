@@ -6,17 +6,16 @@ class CheapItem extends React.Component {
   }
 
   update() {
-    this.props.modifyItem(this.props.item.name);
+    this.props.modifyItem(this.props.item);
   }
 
   render() {
     return (
       <div className="cheapitem card" onClick={this.update.bind(this)}>
         <h3>{this.props.item.name}</h3>
-        <p>Price</p>
-        <p>Image URL</p>
-        <p>Description</p>
-        <p>Address</p>
+        <p>{this.props.item.price}</p>
+        <p>{this.props.item.description}</p>
+        <p>{this.props.item.imageURL}</p>
       </div>
     );
   }
