@@ -31,9 +31,19 @@ pool.connect();
 
 
 // query cheap items table and get 25 items  (how should we sort?)
-const getCheapItems = () => {
+const getCheapItems = (zip, cuisineType) => {
+  var query;
+  if (zip === undefined && cuisineType === undefined) {
+    query = 'SELECT * FROM CheapItems';
+  } else if (zip !== undefined && cuisineType === undefined) {
+    query = 'SELECT * from cheapitems WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = ' + zip + ')';
+  } else {
+    //SELECT * from cheapitems WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = 94103 AND type LIKE '%Salad%');
+    query = "SELECT * from cheapitems WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = " + zip + " AND type LIKE '%" + cuisineType +"%')";
+  }
+
 	return new Promise(function(resolve, reject) {
-		pool.query('SELECT * FROM CheapItems', function(err, result) {
+		pool.query(query, function(err, result) {
 			if (err) {
 				reject(err);
 			} else {
