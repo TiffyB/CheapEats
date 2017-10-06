@@ -65,29 +65,3 @@ button {
 	margin: 0 auto;
 	border-radius: 6px;
 }
-
-.col3 {
-  border: 2px solid black;
-  width: 30%;
-  min-width: 100px;
-  height: 70%;
-  display: inline-block;  
-  margin-right: 3%;
-  font-size: 1em;
-  font-weight: normal;
-}
-
-.scroll {
-  height: 82%;
-  overflow-y: auto;
-}
-
-.col3-right {
-  margin-right: 0;
-}
-
-.card {
-  border: 1px solid black;
-  margin: 3px;
-
-}

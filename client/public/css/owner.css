@@ -1,0 +1,93 @@
+input, #submitButton {
+  margin-left: 15px
+}
+
+#dealOfDayImg {
+  text-align: center;
+  height: 200px;
+  width:250px;
+  display:block;
+    margin:auto;
+    margin-bottom: 15px;
+}
+
+span {
+  color: red;
+  font-weight: bold;
+}
+
+img {
+  border-radius: 6px;
+}
+
+h1,h2,h3,h4,p {
+  text-align: center;
+}
+
+h2{
+  color: red;
+}
+
+h4 {
+  color: gold;
+}
+
+.secondHeader {
+  color: #ce6e46;
+  margin-top: 40px;
+  margin-left: 200px;
+}
+
+#mainImg {
+  background: url("../img/hotdogs.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+#secondImg {
+  background: url("../img/bread.jpeg") no-repeat;
+  background-size: 100%;
+ }
+
+button {
+  cursor: pointer;
+}
+
+#mainBorder {
+  border: 2px solid black;
+  background: black;
+  color:white;
+  opacity: .8;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.col3 {
+  border: 2px solid black;
+  width: 30%;
+  min-width: 100px;
+  height: 70%;
+  display: inline-block;  
+  margin-right: 3%;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.scroll {
+  height: 82%;
+  overflow-y: auto;
+}
+
+.col3-right {
+  margin-right: 0;
+}
+
+.card {
+  border: 1px solid black;
+  margin: 3px;
+
+}
