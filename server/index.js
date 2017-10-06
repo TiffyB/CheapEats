@@ -13,7 +13,7 @@ const db = require('../database/index.js').pool;
 const app = express();
 const yelp = require('../helpers/yelp.js');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 2438;
 const sessionOpts = {
   saveUninitialized: true,
   resave: false,
@@ -46,8 +46,9 @@ app.use(passport.session());
 routes(app, passport);
 
 
+
 app.listen(PORT, () => {
-  console.log(`server listening on PORT: ${PORT.toString()}`);
+  console.log(`server listening on PORT: ${PORT}`);
 });
 
 
