@@ -8,7 +8,7 @@ CREATE TABLE Deals (
   price DECIMAL(3, 2),
   dealName VARCHAR(50),
   description TEXT,
-  imageURL VARCHAR(100),
+  imageURL VARCHAR(150),
   startDate DATE,
   startTime TIME,
   endDate DATE,
@@ -30,7 +30,7 @@ CREATE TABLE CheapItems (
   yelp_ID INTEGER,
   price DECIMAL(3, 2),
   menuItem VARCHAR(100),
-  imageURL VARCHAR(100),
+  imageURL VARCHAR(150),
   description TEXT,
   PRIMARY KEY (id)
 );
@@ -66,9 +66,10 @@ CREATE TABLE YelpData (
   address TEXT,
   ZIP INTEGER,
   type VARCHAR(25),
-  imageURL VARCHAR(50),
-  restaurantURL VARCHAR,
+  imageURL VARCHAR(150),
+  restaurantURL VARCHAR(150),
   owner_ID INTEGER,
+  name VARCHAR,
   PRIMARY KEY (id)
 );
 
