@@ -33,3 +33,8 @@ backup/
 
 */.DS_Store
 .DS_Store
+
+client/public/ownerbundle.js
+client/public/homebundle.js
+
+
