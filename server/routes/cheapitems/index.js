@@ -1,4 +1,5 @@
-const cDB = require('../../../database');
+// const cDB = require('../../../database');
+const cDB = require('../../../database/index.js');
 
 const cheapitemsRoutes = (app) =>{
 
@@ -7,7 +8,8 @@ const cheapitemsRoutes = (app) =>{
     // query cheap items table and get 25 items  (how should we sort?)
     cDB.getCheapItems()
       .then(cheapItems => {
-        res.send(cheapItems);
+        console.log(cheapItems.rows)
+        res.send(cheapItems.rows);
       }).catch(err => {
         console.log('GET cheapitems error!!!\n', err);
         res.redirect('/');

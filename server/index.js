@@ -8,6 +8,7 @@ const auth = require('./middleware/auth.js');
 const routes = require('./routes');
 // const redis = require('redis').createClient();
 // const RedisStore = require('connect-redis')(session);
+const db = require('../database/index.js').pool;
 
 const app = express();
 const yelp = require('../helpers/yelp.js');
