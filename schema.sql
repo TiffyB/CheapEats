@@ -1,3 +1,16 @@
+
+-- ---
+-- Globals
+-- ---
+
+-- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+-- SET FOREIGN_KEY_CHECKS=0;
+
+-- ---
+-- Table 'Deals'
+-- 
+-- ---
+
 DROP TABLE IF EXISTS Deals cascade;
 		
 CREATE SEQUENCE IF NOT EXISTS Deals_seq;
@@ -65,9 +78,9 @@ CREATE TABLE YelpData (
   yelp_api_ID VARCHAR(100),
   address TEXT,
   ZIP INTEGER,
-  type VARCHAR(25),
-  imageURL VARCHAR(150),
-  restaurantURL VARCHAR(150),
+  type VARCHAR(100),
+  imageURL VARCHAR,
+  restaurantURL VARCHAR,
   owner_ID INTEGER,
   name VARCHAR,
   PRIMARY KEY (id)
@@ -98,3 +111,47 @@ ALTER TABLE Deals ADD FOREIGN KEY (yelp_ID) REFERENCES YelpData (id);
 ALTER TABLE CheapItems ADD FOREIGN KEY (yelp_ID) REFERENCES YelpData (id);
 ALTER TABLE YelpData ADD FOREIGN KEY (owner_ID) REFERENCES Owners (id);
 ALTER TABLE Users ADD FOREIGN KEY (cheapitem_id) REFERENCES CheapItems (id);
+
+
+-- ---
+-- Table Properties
+-- ---
+
+-- ALTER TABLE `Deals` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `CheapItems` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Owners` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `YelpData` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `Users` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ---
+-- Test Data
+-- ---
+
+-- INSERT INTO `Deals` (yelp_ID, price, dealName, description, imageURL, startTime, startDate, endTime, endDate) VALUES
+-- (1, 5.00, 'Half-Priced Mixt Ceasar','romaine hearts, shaved parmesan, avocado, seasonal radish, garlic herb croutons, savory herbs, caesar dressing','https://s3-media3.fl.yelpcdn.com/bphoto/DOAvz0pcghE07_Kopl1icg/o.jpg','','','');
+
+INSERT INTO Owners (login, password) VALUES
+('restaurant1','salad');
+
+INSERT INTO Owners (login, password) VALUES
+('tselogs', 'filipinofood');
+
+INSERT INTO YelpData (yelp_api_ID, address, ZIP, type, imageURL, restaurantURL, name, owner_ID) VALUES
+('mixt-san-francisco-9','51 Yerba Buena Ln\nSan Francisco, CA 94103', 94103,'Salad, American (New), Vegetarian','https://s3-media3.fl.yelpcdn.com/bphoto/DOAvz0pcghE07_Kopl1icg/o.jpg','https://www.yelp.com/biz/mixt-san-francisco-9?adjust_creative=EF98aLeuaj_agomwLZqxkA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=EF98aLeuaj_agomwLZqxkA','Mixt', 1);
+
+INSERT INTO YelpData (yelp_api_ID, address, ZIP, type, imageURL, restaurantURL, name, owner_ID) VALUES 
+('tselogs-san-francisco-5', '552 Jones St\nSan Francisco, CA 94102', 94102, 'Filipino', 'https://s3-media1.fl.yelpcdn.com/bphoto/0lieMPClRsd4XSj_6xkBeA/o.jpg', 'https://www.yelp.com/biz/tselogs-san-francisco-5?adjust_creative=EF98aLeuaj_agomwLZqxkA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=EF98aLeuaj_agomwLZqxkA', 'Tselogs', 2);
+
+
+INSERT INTO CheapItems (yelp_ID, price, menuItem, imageURL, description) VALUES
+(1, 9.95,'Mixt Ceasar','https://s3-media3.fl.yelpcdn.com/bphoto/hLZDGlGqjPZRAKmgN87v0A/o.jpg','romaine hearts, shaved parmesan, avocado, seasonal radish, garlic herb croutons, savory herbs, caesar dressing');
+
+INSERT INTO CheapItems (yelp_ID, price, menuItem, imageURL, description) VALUES
+(2, 9.99,'Pancit Bihon','https://s3-media4.fl.yelpcdn.com/bphoto/YDF1elX5vkhGXjv22_kjcw/o.jpg','Rice stick noodles sauteed in pork, shrimp, fishball, with vegetables topped with boiled egg, roasted garlic, green onion and pork rinds');
+
+
+INSERT INTO Users (login, password, cheapitem_id) VALUES
+('someguy','password1234', 1);
+
+INSERT INTO Users (login, password, cheapitem_id) VALUES
+('anotherguy','password1234', 2);

@@ -1,6 +1,8 @@
 const ownerRoutes = require('./owner');
 const cheapitemsRoutes = require('./cheapitems');
 const dealsRoutes = require('./deals');
+const yelp = require('../../helpers/yelp.js');
+const cDB = require('../../database/index.js');
 
 const routes = (app, passport) => {
 
@@ -55,20 +57,32 @@ const routes = (app, passport) => {
       })
       //build the object to add to the database
       var yelpRow = {
-        id: restaurantInfo.id,
+        yelp_api_ID: restaurantInfo.id,
         name: restaurantInfo.name,
-        image_url: restaurantInfo.image_url,
-        cuisineType: cuisineTypes.join(', '),
-        url: restaurantInfo.url,
-        zip: restaurantInfo.location.zip_code,
-        location: restaurantInfo.location.display_address.join('\n')
+        imageURL: restaurantInfo.image_url,
+        type: cuisineTypes.join(', '),
+        restaurantURL: restaurantInfo.url,
+        ZIP: restaurantInfo.location.zip_code,
+        address: restaurantInfo.location.display_address.join('\n')
       }
       //TODO:
       //add the yelpRow object to the yelp table in database
+      return cDB.saveRestaurant(yelpRow)
+      .then((newRow) => {
+        console.log(newRow)
+        res.send(JSON.stringify(newRow));
+      })
+      .catch((error) => {
+        console.log(error)
+        res.sendStatus(500);
+      })
 
-      res.send(JSON.stringify(yelpRow)); //boilerplate response until integrated with DB
+
+
+      // res.send(JSON.stringify(yelpRow)); //boilerplate response until integrated with DB
     })
     .catch((error) => {
+      console.log(error)
       res.sendStatus(500);
     })
   });
