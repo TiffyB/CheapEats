@@ -62,7 +62,7 @@ class RestaurantList extends React.Component {
         <Modal
           id="modifyRestaurant"
           closeTimeoutMS={150}
-          contentLabel="modifyModal"
+          contentLabel="modifyRestaurant"
           isOpen={this.state.modifyModal}>
 
           <h1>Restaurant Info.</h1>
