@@ -21,7 +21,7 @@ const cheapitemsRoutes = (app) =>{
     // query cheap items table with ZIP and get 25 items  (how should we sort?)
     cDB.getCheapItems(req.params.zip)
       .then(cheapItems => {
-        res.send(cheapItems);
+        res.send(cheapItems.rows);
       }).catch(err => {
         console.log('GET cheapitems error!!!\n', err);
         res.redirect('/');
@@ -33,7 +33,7 @@ const cheapitemsRoutes = (app) =>{
     // query cheap items table with ZIP and cuisineType, and get 25 items  (how should we sort?)
     cDB.getCheapItems(req.params.zip, req.params.cuisineType)
       .then(cheapItems => {
-        res.send(cheapItems);
+        res.send(cheapItems.rows);
       }).catch(err => {
         console.log('GET cheapitems error!!!\n', err);
         res.redirect('/');

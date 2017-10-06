@@ -155,4 +155,7 @@ INSERT INTO Users (login, password, cheapitem_id) VALUES
 
 INSERT INTO Users (login, password, cheapitem_id) VALUES
 ('anotherguy','password1234', 2);
+<<<<<<< HEAD
 
+=======
+>>>>>>> Completed implementation of getCheapItems database query
