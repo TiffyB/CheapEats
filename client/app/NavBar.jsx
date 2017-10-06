@@ -16,7 +16,7 @@ const NavBar = (props) => (
       	  <input type="text" name="" placeholder="ZipCode" />
       	  <button id="submitButton">Submit </button>
         </ul>
-        <button className="btn btn-outline-success" type="button">Owner's Login</button>
+        <a href='/login.html'><button className="btn btn-outline-success" type="button">Owner's Login</button></a>
       </div>
     </nav>
 
