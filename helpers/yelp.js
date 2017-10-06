@@ -1,5 +1,5 @@
 const request = require('request');
-const config = require('../yelp_config.js');
+const config = require('../config.js');
 
 let getClosestMatches = (term, location) => {
 

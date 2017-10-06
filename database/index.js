@@ -20,10 +20,11 @@ Install postgreSQL using the following steps:
 
 var pg = require('pg');
 var Promise = require('bluebird');
+const config = require('../config.js');
 
 var config = {
-	user: 'postgres',
-	password: '',
+	user: config.postgresUsername,
+	password: config.postgresPassword,
 	database: 'cheapeats'
 }
 //does a max number of clients need to be added to the config?
