@@ -5,7 +5,7 @@ CREATE SEQUENCE IF NOT EXISTS Deals_seq;
 CREATE TABLE Deals (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('Deals_seq'),
   yelp_ID INTEGER,
-  price DECIMAL(3, 2),
+  price DECIMAL(4, 2),
   dealName VARCHAR(50),
   description TEXT,
   imageURL VARCHAR(150),
@@ -28,7 +28,7 @@ CREATE SEQUENCE IF NOT EXISTS CheapItems_seq;
 CREATE TABLE CheapItems (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('CheapItems_seq'),
   yelp_ID INTEGER,
-  price DECIMAL(3, 2),
+  price DECIMAL(4, 2),
   menuItem VARCHAR(100),
   imageURL VARCHAR(150),
   description TEXT,
