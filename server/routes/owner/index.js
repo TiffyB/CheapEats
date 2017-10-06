@@ -34,7 +34,7 @@ const ownerRoutes = (app, passport) =>{
     })
   );
 
-  app.get('/owner',  (req, res, next) => {
+  app.get('/owner',  (req, res, next) => { // TODO: putback isLoggedIn
     // isLoggedIn,
     // should display owner page
     console.log('GET owner');
@@ -52,6 +52,22 @@ const ownerRoutes = (app, passport) =>{
     // should display owenr login page
     console.log('GET owner/login');
     res.sendFile(path.join(__dirname, '../../../client/public/login.html'));
+  });
+
+  app.get('/owner/restaurants', (req, res, next) => {
+    // get owner restaurants from server
+    console.log('get owner/restaurants of', req.query)
+    res.send([{name:'Restaurant1'},{name:'Restaurant2'},{name:'Restaurant3'},{name:'Restaurant4'}]);
+  });
+  app.get('/owner/deals', (req, res, next) => {
+    // get owner restaurants from server
+    console.log('get owner/deals of', req.query)
+    res.send([{name:'deal1'},{name:'deal2'},{name:'deal3'},{name:'deal4'}]);
+  });
+  app.get('/owner/cheapitems', (req, res, next) => {
+    // get owner restaurants from server
+    console.log('get owner/cheapitems of', req.query)
+    res.send([{name:'item1'},{name:'item2'},{name:'item3'},{name:'item4'}]);
   });
 
   app.post('/owner/deals', isLoggedIn, (req, res) => {
