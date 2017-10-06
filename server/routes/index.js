@@ -2,6 +2,7 @@ const ownerRoutes = require('./owner');
 const cheapitemsRoutes = require('./cheapitems');
 const dealsRoutes = require('./deals');
 const yelp = require('../../helpers/yelp.js');
+const cDB = require('../../database/index.js');
 
 const routes = (app, passport) => {
 
@@ -66,26 +67,22 @@ const routes = (app, passport) => {
       }
       //TODO:
       //add the yelpRow object to the yelp table in database
+      return cDB.saveRestaurant(yelpRow)
+      .then((newRow) => {
+        console.log(newRow)
+        res.send(JSON.stringify(newRow));
+      })
+      .catch((error) => {
+        console.log(error)
+        res.sendStatus(500);
+      })
 
 
-      /*
-CREATE TABLE YelpData (
-  id INTEGER NOT NULL DEFAULT NEXTVAL ('YelpData_seq'),
-  yelp_api_ID VARCHAR(100),
-  address TEXT,
-  ZIP INTEGER,
-  type VARCHAR(25),
-  imageURL VARCHAR(50),
-  restaurantURL VARCHAR,
-  owner_ID INTEGER,
-  name VARCHAR(50),
-  PRIMARY KEY (id)
-);
-      */
 
-      res.send(JSON.stringify(yelpRow)); //boilerplate response until integrated with DB
+      // res.send(JSON.stringify(yelpRow)); //boilerplate response until integrated with DB
     })
     .catch((error) => {
+      console.log(error)
       res.sendStatus(500);
     })
   });
