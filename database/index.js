@@ -74,18 +74,78 @@ The getDeals function takes in:
 zip (integer): Optional parameter. Pulls all deals in that zip code
 cuisineType (string): Optional parameter. If provided, must also provide zip code. Pulls deals that match that cuisine type and zip code.
 
-Output: A promise that resolves to an array of all matching deals. (Currently not limiting to 25.)
+Output: A promise that resolves to an array of all matching deals going on at the time of search. (Currently not limiting to 25 deals.)
+Note: The current date/time stamp is generated within the function at the time of use. Cannot currently search other dates/times.
 =========================================================== */
 const getDeals = (zip, cuisineType) => {
+  var today = new Date();
+  var year = today.getFullYear();
+  var month = today.getMonth() + 1; //months are stupidly returned as 0 thru 11 in Javascript
+  var day = today.getDate();
+  var hour = today.getHours();
+  var min = today.getMinutes();
+  var sec = today.getSeconds();
+
+  var createDateString = (year, month, day) => { //need to turn the date into a string for query purposes
+    var year = year.toString();
+    var monthString;
+    var dayString;
+    if (month < 10) {
+      monthString = "0" + month.toString();
+    } else {
+      monthString = month.toString();
+    }
+    if (day < 10) {
+      dayString = "0" + day.toString();
+    } else {
+      dayString = day.toString();
+    }
+    return year + "-" + monthString + "-" + dayString;
+  };
+  
+  var createTimeString = (hour, min, sec) => { //need to turn the time into a string for query purposes
+    var timeString = "";
+    var hourString;
+    var minString;
+    var secString;
+    if (hour < 10) {
+      hourString = "0" + hour.toString();
+    } else {
+      hourString = hour.toString();
+    }
+    if (min < 10) {
+      minString = "0" + min.toString();
+    } else {
+      minString = min.toString();
+    }
+    if (sec < 10) {
+      secString = "0" + sec.toString();
+    } else {
+      secString = sec.toString();
+    }
+    return hourString + ":" + minString + ":" + secString;
+  };
+
+  var dateString = createDateString(year, month, day);
+  var timeString = createTimeString(hour, min, sec);
+  
+  /* ========
+  Use variables below to test other dates and times (Comment out the above 2 lines)
+  =========*/
+  // var dateString = '2017-10-09'; 
+  // var timeString = '16:00:00'; 
+
+
+  var dateQuery = " CAST(startdate AS DATE) <= '" + dateString + "' AND CAST(enddate AS DATE) >= '" + dateString + "' AND CAST(starttime AS TIME) <= '" + timeString + "' AND CAST(endtime as TIME) >= '" + timeString + "'";
+
   var query;
   if (zip === undefined && cuisineType === undefined) {
-    query = 'SELECT * FROM Deals';
+    query = "SELECT * FROM Deals WHERE" + dateQuery;
   } else if (zip !== undefined && cuisineType === undefined) {
-    query = 'SELECT * from Deals WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = ' + zip + ')';
+    query = "SELECT * from Deals WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = " + zip + ") AND" + dateQuery;
   } else {
-    //SELECT * from cheapitems WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = 94103 AND type LIKE '%Salad%');
-    //may need to force cuisineType to lower case
-    query = "SELECT * from Deals WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = " + zip + " AND type LIKE '%" + cuisineType +"%')";
+    //may need to force cuisineType to lower case in database
+    query = "SELECT * from Deals WHERE yelp_ID IN (SELECT id FROM YelpData WHERE ZIP = " + zip + " AND type LIKE '%" + cuisineType +"%') AND" + dateQuery;
   }
 
   return new Promise(function(resolve, reject) {
