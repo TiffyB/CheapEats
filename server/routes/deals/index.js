@@ -9,8 +9,8 @@ const dealsRoutes = (app) =>{
     // query deals table and get 25 deals
     cDB.getDeals()
       .then(deals => {
-        console.log(deals);
-        res.send(deals);
+        console.log(deals.rows);
+        res.send(deals.rows);
       }).catch(err => {
         console.log('GET deals error');
       });
@@ -21,8 +21,8 @@ const dealsRoutes = (app) =>{
     // query deals with ZIP table, and get 25 deals
     cDB.getDeals(req.params.zip)
       .then(deals => {
-        console.log(deals);
-        res.send(deals);
+        console.log(deals.rows);
+        res.send(deals.rows);
       }).catch(err => {
         console.log('GET deals error');
       });
@@ -33,8 +33,8 @@ const dealsRoutes = (app) =>{
     // query deals table with ZIP and cuisineType, and get 25 deals
     cDB.getDeals(req.params.zip, req.params.cuisineType)
       .then(deals => {
-        console.log(deals);
-        res.send(deals);
+        console.log(deals.rows);
+        res.send(deals.rows);
       }).catch(err => {
         console.log('GET deals error');
       });

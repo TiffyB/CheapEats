@@ -215,7 +215,7 @@ const saveRestaurant = (yelpRow) => {
 
   var query = "INSERT INTO YelpData (yelp_api_ID, address, ZIP, type, imageURL, restaurantURL, name, owner_ID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
   //need to figure out how to get owner_ID here
-  var values = [yelpRow.yelp_api_ID, yelpRow.address, yelpRow.ZIP, yelpRow.type, yelpRow.imageURL, yelpRow.restaurantURL, yelpRow.name, yelp.owner_ID];
+  var values = [yelpRow.yelp_api_ID, yelpRow.address, yelpRow.ZIP, yelpRow.type, yelpRow.imageURL, yelpRow.restaurantURL, yelpRow.name, yelpRow.owner_ID];
   return new Promise(function(resolve, reject) {
     pool.query(query, values, function(err, result) {
       if (err) {
