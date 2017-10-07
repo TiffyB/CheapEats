@@ -15,27 +15,45 @@ class App extends React.Component {
     }
   }
 
-  updateQuery(cuisine, zipCode) {
-    $.ajax({
-      type: 'GET',
-      url: '/items',
-      contentType: 'application/json',
-      data: JSON.stringify(cuisine, zipCode),
-      success: (data) => {
-        console.log('data received')
-        
-      },
-      error: (err) => {
-        console.log('ERROR', err)
-      }
-    }).then({})
-  }
+  // updateQuery(cuisine, zipCode) {
+  //   console.log("updateQuery RANnnn!!!")
+  //   console.log(cuisine)
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: '/cheapitems',
+  //     contentType: 'application/json',
+  //     data: JSON.stringify({cuisine,zipCode}),
+  //     success: (data) => {
+  //       console.log('data received')
+  //     },
+  //     error: (err) => {
+  //       console.log('ERROR', err)
+  //     }
+  //   }).then({})
+  // }
+
+
+  // componentDidMount(cuisine, zipCode) {
+  //   console.log("updateQuery RANnnn!!!")
+  //   console.log(cuisine)
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: '/cheapitems',
+  //     contentType: 'application/json',
+  //     success: () => {
+  //       console.log('data received')
+  //     },
+  //     error: (err) => {
+  //       console.log('ERROR', err)
+  //     }
+  //   }).then({})
+
 
 
    render() {
       return (
          <div>
-          <NavBar/> 
+          <NavBar updateQuery={this.updateQuery.bind(this)} /> 
           <DailyDeal data={this.state.data} />
           <div className="container">
             <MainContent data={this.state.data}/>

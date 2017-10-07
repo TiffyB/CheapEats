@@ -4,7 +4,7 @@ const cDB = require('../../../database/index.js');
 const cheapitemsRoutes = (app) =>{
 
   app.get('/cheapitems', (req, res) => {
-    console.log('list cheapitems');
+    console.log('list cheapitems', req.body);
     // query cheap items table and get 25 items  (how should we sort?)
     cDB.getCheapItems()
       .then(cheapItems => {
