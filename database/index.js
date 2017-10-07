@@ -248,6 +248,34 @@ const getRestaurants = (login) => {
   });
 }
 
+const getCheapItemsByRestaurant = (restaurantName) => {
+  var query = "SELECT * FROM CheapItems WHERE yelp_ID IN (SELECT id FROM YelpData WHERE name = '" + restaurantName + "')";
+
+  return new Promise(function(resolve, reject) {
+    pool.query(query, function(err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+const getDealsByRestaurant = (restaurantName) => {
+  var query = "SELECT * FROM Deals WHERE yelp_ID IN (SELECT id FROM YelpData WHERE name = '" + restaurantName + "')";
+
+  return new Promise(function(resolve, reject) {
+    pool.query(query, function(err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 module.exports = {
 	pool: pool,
 	getCheapItems: getCheapItems,
@@ -257,5 +285,7 @@ module.exports = {
   saveOwner: saveOwner,
   saveDeals: saveDeals,
   saveCheapItems: saveCheapItems,
-  saveRestaurant: saveRestaurant
+  saveRestaurant: saveRestaurant,
+  getCheapItemsByRestaurant: getCheapItemsByRestaurant,
+  getDealsByRestaurant: getDealsByRestaurant
 };
