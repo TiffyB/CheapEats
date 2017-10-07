@@ -12,8 +12,8 @@
 -- ---
 
 DROP TABLE IF EXISTS Deals cascade;
-		
-CREATE SEQUENCE IF NOT EXISTS Deals_seq;
+DROP SEQUENCE IF EXISTS Deals_seq;
+CREATE SEQUENCE Deals_seq;
 
 CREATE TABLE Deals (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('Deals_seq'),
@@ -35,8 +35,8 @@ CREATE TABLE Deals (
 -- ---
 
 DROP TABLE IF EXISTS CheapItems cascade;
-		
-CREATE SEQUENCE IF NOT EXISTS CheapItems_seq;
+DROP SEQUENCE IF EXISTS CheapItems_seq;
+CREATE SEQUENCE CheapItems_seq;
 
 CREATE TABLE CheapItems (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('CheapItems_seq'),
@@ -54,8 +54,8 @@ CREATE TABLE CheapItems (
 -- ---
 
 DROP TABLE IF EXISTS Owners cascade;
-		
-CREATE SEQUENCE IF NOT EXISTS Owners_seq;
+DROP SEQUENCE IF EXISTS Owners_seq;
+CREATE SEQUENCE Owners_seq;
 
 CREATE TABLE Owners (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('Owners_seq'),
@@ -70,8 +70,8 @@ CREATE TABLE Owners (
 -- ---
 
 DROP TABLE IF EXISTS YelpData cascade;
-		
-CREATE SEQUENCE IF NOT EXISTS YelpData_seq;
+DROP SEQUENCE IF EXISTS YelpData_seq;
+CREATE SEQUENCE YelpData_seq;
 
 CREATE TABLE YelpData (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('YelpData_seq'),
@@ -92,8 +92,8 @@ CREATE TABLE YelpData (
 -- ---
 
 DROP TABLE IF EXISTS Users cascade;
-		
-CREATE SEQUENCE IF NOT EXISTS Users_seq;
+DROP SEQUENCE IF EXISTS Users_seq;
+CREATE SEQUENCE Users_seq;
 
 CREATE TABLE Users (
   id INTEGER NOT NULL DEFAULT NEXTVAL ('Users_seq'),
@@ -131,11 +131,11 @@ ALTER TABLE Users ADD FOREIGN KEY (cheapitem_id) REFERENCES CheapItems (id);
 -- (1, 5.00, 'Half-Priced Mixt Ceasar','romaine hearts, shaved parmesan, avocado, seasonal radish, garlic herb croutons, savory herbs, caesar dressing','https://s3-media3.fl.yelpcdn.com/bphoto/DOAvz0pcghE07_Kopl1icg/o.jpg','','','');
 
 INSERT INTO Owners (login, password) VALUES
-('restaurant1','$2a$10$SPAvAmjR4FRlxJAGye98Uey.EdyOT1FXt2YMWevBzXU6mQ36QSJv2');
+('restaurant1','$2a$10$VLA2V0KBahnfNWIeNmxzcedn8bZnEPOcVi8N.hNemdj6NwqQ7pdRq');
 -- hashed value of 'salad' = '$2a$10$SPAvAmjR4FRlxJAGye98Uey.EdyOT1FXt2YMWevBzXU6mQ36QSJv2'
 
 INSERT INTO Owners (login, password) VALUES
-('tselogs', '$2a$10$U83U3c0lPsWleoAOgLZGjOXc1oM.CqaoINjB3gJOPMSEjrFB206oO');
+('tselogs', '$2a$10$x.IUhaGbZkL8osWcf7B3eOAzeK/wCY6VAIljqB1P5fZ8er.hH0HaG');
 -- hashed value of 'filipinofood' = '$2a$10$U83U3c0lPsWleoAOgLZGjOXc1oM.CqaoINjB3gJOPMSEjrFB206oO'
 
 INSERT INTO YelpData (yelp_api_ID, address, ZIP, type, imageURL, restaurantURL, name, owner_ID) VALUES
