@@ -21,26 +21,17 @@ const ownerRoutes = (app, passport) =>{
 
   app.get('/login', (req, res, next) => {
     // should display owenr login page
-    console.log('GET owner/login');
+    console.log('GET login');
     res.sendFile(path.join(__dirname, '../../../client/public/login.html'));
   });
 
-  // app.post('/owner/login', 
-  //   passport.authenticate('local-login', {
-  //     successRedirect: '/owner',
-  //     failureRedirect: '/login',
-  //     session: true,
-  //   })
-  // );
-
-  app.post('/owner/login', (req,res) => {
-    console.log('owner login reached')
-    console.log("HERE", req.body);
-    res.end();
-  })
-
-  //code above shows that code is sent to the route
-  //PLEASE FIX UNCOMMENT lines 28-34 and delete 36 - 40 to update
+  app.post('/owner/login', 
+    passport.authenticate('local-login', {
+      successRedirect: '/owner',
+      failureRedirect: '/login',
+      session: true,
+    })
+  );
 
   app.get('/owner/logout', isLoggedIn, (req, res) => {
     console.log('GET owner/logout', req.user);

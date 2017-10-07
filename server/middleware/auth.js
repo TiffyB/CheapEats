@@ -1,15 +1,16 @@
 // for hashing
 const bcrypt = require('bcrypt');
 const saltRounds = 0;
-// check if password is valid  
-//    return promise object
-const validPassword = (password, hash) => {
-  return bcrypt.compare(password, hash);
-}
+
 // generate hash to store password
 //    return promise object
 const genHash = password => {
   return bcrypt.hash(password, saltRounds);
+}
+// check if password is valid  
+//    return promise object
+const validPassword = (password, hash) => {
+  return bcrypt.compare(password, hash);
 }
 
 
@@ -27,8 +28,11 @@ const auth = (app,passport) => {
   passport.deserializeUser((id, done) => {
     console.log('deserializeUser id:', id);
     models.getOwnerById(id)
-      .then( user => {
-        console.log('!!!!! check if result is array: ',user);
+      .then( result => {
+        var user = {
+          id: result.rows[0].id,
+          login: result.rows[0].login.trim(),
+        }
         done(null, user); // TODO:   check if it's 
       })
       .catch( err => {
@@ -45,7 +49,6 @@ const auth = (app,passport) => {
     console.log('local-signup');
     models.getOwnerByLogin(login)
       .then(owners => {
-        console.log('!!!!!!!!!  check result type: ', owners);
         if(owners.length !== 0) {
           throw new Error('signup: duplicate username!');
         } else {
@@ -69,9 +72,14 @@ const auth = (app,passport) => {
   },
   (req, login, password, done) => {
     console.log(`local-login login: ${login}, password: ${password}`);
+    var user = {};
     models.getOwnerByLogin(login)
-      .then( owners => { 
-        console.log(`login: ${login}, password: ${password}`);
+      .then( result => { 
+        var owners = result.rows;
+        console.log(`login: ${owners[0].login.trim()}, password: ${owners[0].password}`);
+        user.id = owners[0].id;
+        user.login = owners[0].login;
+        user.password = owners[0].password;
         if (owners.length === 0) {
           console.log('Incorrect Username');
           throw new Error('login: Incorrect Username');
@@ -80,14 +88,14 @@ const auth = (app,passport) => {
         }
       }).then(valid => {
         if(valid) {
-          console.log('username and password match');
-          return done(null, owners[0]);
+          console.log('username and password match', user );
+          return done(null, user);
         } else {
           console.log('Incorrect Password');
           throw new Error('Incorrect Password');
         }
       }).catch(err => {
-        console.log('login error');
+        console.log('login error', err);
         return done(null, false);
       });
     }
