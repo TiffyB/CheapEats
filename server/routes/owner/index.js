@@ -11,7 +11,7 @@ const ownerRoutes = (app, passport) =>{
     }
   };
 
-  app.get('/owner',  (req, res, next) => { // TODO: putback isLoggedIn
+  app.get('/owner', isLoggedIn,  (req, res, next) => { // TODO: putback isLoggedIn
     // isLoggedIn,
     // should display owner page
     console.log('GET owner');
@@ -36,15 +36,19 @@ const ownerRoutes = (app, passport) =>{
   app.get('/owner/logout', isLoggedIn, (req, res) => {
     console.log('GET owner/logout', req.user);
     req.logout();
-    res.send('logout');
+    // res.send('logout');
+    res.redirect('/login');
   });
 
+
+  // TODO: implement signup
   app.get('/owner/signup', (req, res, next) => {
     // should display owner signup page
     console.log('GET owner/signup');
     res.send('GET owner/signup');
   });
 
+  // TODO: implement signup
   app.post('/owner/signup', 
     passport.authenticate('local-signup', {
       successRedirect: '/owner',
@@ -54,20 +58,20 @@ const ownerRoutes = (app, passport) =>{
   );
 
 
-  app.get('/owner/restaurants', (req, res, next) => {
+  app.get('/owner/restaurants', isLoggedIn, (req, res, next) => {
     // get owner restaurants from server
-    console.log('get owner/restaurants of', req.query)
+    console.log('get owner/restaurants of', req.query);
     res.send([
       {name:'Restaurant1', address:'123 S. Market st.', ZIP: 12345, type: 'American', imageURL:'', restaurantURL:'', YelpID:''},
       {name:'Restaurant2', address:'456 N. Mission ave.', ZIP: 67890, type: 'Indian', imageURL:'', restaurantURL:'', YelpID:''}
     ]);
   });
-  app.post('/owner/restaurants', (req, res, next) => {
+  app.post('/owner/restaurants', isLoggedIn, (req, res, next) => {
     console.log('post owner restaurants', req.body);
     res.send('ok');
   });
 
-  app.get('/owner/deals', (req, res, next) => {
+  app.get('/owner/deals', isLoggedIn, (req, res, next) => {
     // get owner restaurants from server
     console.log('get owner/deals of', req.query)
     res.send([
@@ -77,12 +81,12 @@ const ownerRoutes = (app, passport) =>{
       {name:'Deal4', price:4.56, description:'bye', imageURL:'', startTime:undefined, startDate:undefined, endDate:undefined, endTime:undefined}
     ]);
   });
-  app.post('/owner/deals', (req, res) => {
+  app.post('/owner/deals', isLoggedIn, (req, res) => {
     console.log('post owner deals', req.body);
 
     res.send('ok');
   });
-  app.get('/owner/cheapitems', (req, res, next) => {
+  app.get('/owner/cheapitems', isLoggedIn, (req, res, next) => {
     // get owner restaurants from server
     console.log('get owner/cheapitems of', req.query)
     res.send([
@@ -92,7 +96,7 @@ const ownerRoutes = (app, passport) =>{
     ]);
   });
 
-  app.post('/owner/cheapItems', (req, res) => {
+  app.post('/owner/cheapItems', isLoggedIn, (req, res) => {
     console.log('post owner cheapitems', req.body);
     res.send('ok');
   });

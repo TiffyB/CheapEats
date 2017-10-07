@@ -206,7 +206,7 @@ const saveCheapItems = (cheapItem) => {
 }
 
 /* ===========================================================
-The saveCheapItems function takes in:
+The saveRestaurant function takes in:
 yelpRow (object): has the following properties {yelp_api_ID, address, ZIP, type, imageURL, restaurantURL, name, owner_ID}
 
 Output: A promise object resolving to the added row information.
@@ -227,6 +227,26 @@ const saveRestaurant = (yelpRow) => {
   })
 }
 
+/* ===========================================================
+The getRestaurants function takes in:
+login (string): the username for that owner
+
+Output: A promse that resolves to an array of all matching restaurants. (Currently not limiting to 25.)
+=========================================================== */
+const getRestaurants = (login) => {
+  var query;
+  query = "SELECT * FROM YelpData WHERE owner_ID IN (SELECT id FROM owners WHERE login = '" + login + "')";
+ 
+  return new Promise(function(resolve, reject) {
+    pool.query(query, function(err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
 
 module.exports = {
 	pool: pool,

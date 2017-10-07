@@ -52,7 +52,14 @@ class RestaurantList extends React.Component {
     console.log(restaurant.name);
     if(this.props.selected === restaurant.name) {
       this.setState({
-        modifyModal: true
+        modifyModal: true,
+        mName: restaurant.name,
+        mAddress: restaurant.address,
+        mZIP: restaurant.ZIP,
+        mType: restaurant.type,
+        mImageURL: restaurant.imageURL,
+        mRestaurantURL: restaurant.restaurantURL,
+        mYelpID: restaurant.YelpID,
       })
     } else {
       this.props.select(restaurant.name);
