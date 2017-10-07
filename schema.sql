@@ -34,6 +34,7 @@ CREATE TABLE Deals (
 -- 
 -- ---
 
+DROP TABLE IF EXISTS CheapItems cascade;
 		
 CREATE SEQUENCE IF NOT EXISTS CheapItems_seq;
 
